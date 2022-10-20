@@ -342,7 +342,7 @@ echo.
 ::   DNS
 set "NOIPDNS=yourhost.no-ip.org"
 ::   Credentials must be encoded to base64 format
-set "NOIPTOKEN=e-mail:password"
+set "NOIPTOKEN=ZS1tYWlsOnBhc3N3b3Jk"
 
 ::  [Dynv6]
 ::   DNS
