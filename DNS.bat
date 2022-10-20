@@ -15,11 +15,11 @@ goto :main
      ::--------------------------------------------------------------------------------------------------------------------
      ::--------------------------------------------------------------------------------------------------------------------
          echo Procurando...
-		 echo.
-		 
+	 echo.
+	 
          set "URLQUATRO=https://api4.ipify.org"
 		 ::----------------------------------------------------------------------------------------------------------
-		 for /f "delims=" %%A in ('curl -s -o nul -X GET -LI -w "%%{http_code}" "%URLQUATRO%"') do set "HTTPCODE=%%A"
+	         for /f "delims=" %%A in ('curl -s -o nul -X GET -LI -w "%%{http_code}" "%URLQUATRO%"') do set "HTTPCODE=%%A"
 		 if "%HTTPCODE%"=="000" (
 		     set IPVQUATRO=""
 		     echo Rede desconectada.
@@ -74,15 +74,15 @@ goto :main
      
      :: username:password@dynupdate.no-ip.com/nic/update?hostname=%DNS%&myip=%IPVQUATRO%
      :: dynupdate.no-ip.com/nic/update?hostname=%DNS%&myip=%IPVQUATRO%
-	 
+     
      setlocal enableDelayedExpansion
 	     
-		 set "AGENTE=Pango/1.0 (Windows NT 10.0; Win64; x64) mail@mail.com"
+         set "AGENTE=Pango/1.0 (Windows NT 10.0; Win64; x64) mail@mail.com"
          set "CABECALHO=Authorization: Basic %NOIPTOKEN%"
-		 ::----------------------------------------------------------------------------------------------------------
-		 set "URL=https://dynupdate.no-ip.com/nic/update?hostname=%NOIPDNS%&myip=%IPVQUATRO%"
          ::----------------------------------------------------------------------------------------------------------
-		 for /f "delims=*" %%A in ('curl -s --user-agent "%AGENTE%" --header "%CABECALHO%" --request GET "%URL%"') do set "RESPOSTA=%%A"
+         set "URL=https://dynupdate.no-ip.com/nic/update?hostname=%NOIPDNS%&myip=%IPVQUATRO%"
+                 ::----------------------------------------------------------------------------------------------------------
+	         for /f "delims=*" %%A in ('curl -s --user-agent "%AGENTE%" --header "%CABECALHO%" --request GET "%URL%"') do set "RESPOSTA=%%A"
 		 
 		 set "ATUALIZADO=good"
 		 set "INALTERADO=nochg"
@@ -118,12 +118,12 @@ goto :main
 :DYNVQUATRO
      
      :: ipv4.dynv6.com/api/update?hostname=%DNS%&token=%TOKEN%&ipv4=%IPVQUATRO%
-	 :: dynv6.com/api/update?hostname=%DNS%&token=%TOKEN%&ipv4=%IPVQUATRO%
+     :: dynv6.com/api/update?hostname=%DNS%&token=%TOKEN%&ipv4=%IPVQUATRO%
 	 
      setlocal enableDelayedExpansion
-		 ::----------------------------------------------------------------------------------------------------------
+	 ::----------------------------------------------------------------------------------------------------------
          set "URL=https://ipv4.dynv6.com/api/update?hostname=%DYNVDNS%&token=%DYNVTOKEN%&ipv4=%IPVQUATRO%"
-		 ::----------------------------------------------------------------------------------------------------------
+	         ::----------------------------------------------------------------------------------------------------------
 		 for /f "delims=*" %%A in ('curl -s --request GET "%URL%"') do set "RESPOSTA=%%A"
 		 
 		 set "ATUALIZADO=addresses updated"
@@ -170,7 +170,7 @@ goto :main
 		 echo.
 		 
          set "URLSEIS=https://api6.ipify.org"
-		 ::--------------------------------------------------------------------------------------------------------------------
+	         ::--------------------------------------------------------------------------------------------------------------------
 		 if "%IPVQUATRO%"=="" (
 		     for /f "delims=*" %%A in ('wmic nicconfig get ipaddress') do for /f "tokens=2-3 delims=, " %%B in ("%%~A") do set "IPVSEIS=%%~B" ) else (
 		 ::----------------------------------------------------------------------------------------------------------
@@ -241,11 +241,11 @@ goto :main
 	 
      setlocal enableDelayedExpansion
 	     
-		 set "AGENTE=Pango/1.0 (Windows NT 10.0; Win64; x64) mail@mail.com"
+         set "AGENTE=Pango/1.0 (Windows NT 10.0; Win64; x64) mail@mail.com"
          set "CABECALHO=Authorization: Basic %NOIPTOKEN%"
-		 ::----------------------------------------------------------------------------------------------------------
-		 set "URL=https://dynupdate.no-ip.com/nic/update?hostname=%NOIPDNS%&myipv6=%IPVSEIS%"
-         ::----------------------------------------------------------------------------------------------------------
+	 ::----------------------------------------------------------------------------------------------------------
+	 set "URL=https://dynupdate.no-ip.com/nic/update?hostname=%NOIPDNS%&myipv6=%IPVSEIS%"
+                 ::----------------------------------------------------------------------------------------------------------
 		 for /f "delims=*" %%A in ('curl -s --user-agent "%AGENTE%" --header "%CABECALHO%" --request GET "%URL%"') do set "RESPOSTA=%%A"
 		 
 		 set "ATUALIZADO=good"
@@ -282,12 +282,12 @@ goto :main
 :DYNVSEIS
      
      :: ipv6.dynv6.com/api/update?hostname=%DNS%&token=%TOKEN%&ipv6=%IPVSEIS%&ipv6prefix=auto
-	 :: dynv6.com/api/update?hostname=%DNS%&token=%TOKEN%&ipv6=%IPVSEIS%&ipv6prefix=auto
+     :: dynv6.com/api/update?hostname=%DNS%&token=%TOKEN%&ipv6=%IPVSEIS%&ipv6prefix=auto
 	 
      setlocal enableDelayedExpansion
-		 ::----------------------------------------------------------------------------------------------------------
+	 ::----------------------------------------------------------------------------------------------------------
          set "URL=https://ipv6.dynv6.com/api/update?hostname=%DYNVDNS%&token=%DYNVTOKEN%&ipv6=%IPVSEIS%&ipv6prefix=auto"
-		 ::----------------------------------------------------------------------------------------------------------
+	         ::----------------------------------------------------------------------------------------------------------
 		 for /f "delims=*" %%A in ('curl -s --request GET "%URL%"') do set "RESPOSTA=%%A"
 		 
 		 set "ATUALIZADO=addresses updated"
