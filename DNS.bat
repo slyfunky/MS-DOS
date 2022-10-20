@@ -24,7 +24,7 @@ goto :main
 		     set IPVQUATRO=""
 		     echo Rede desconectada.
 		     endlocal
-			 goto :eof )
+		     goto :eof )
 		 ::----------------------------------------------------------------------------------------------------------
 		 ::----------------------------------------------------------------------------------------------------------
 		 if "%HTTPCODE%"=="200" (
@@ -53,19 +53,19 @@ goto :main
 		 echo ===================
 		 if "%ARQUIVO%"=="%IPVQUATRO%" (
 		     echo Nao e necessario seu DNS ser atualizado. ;^) ) else (
-			 echo %IPVQUATRO% > "%~dp0ipv4.txt"
-			 echo Arquivo atualizado.
-			 echo.
-			 echo.
-			 echo.
-			 echo Iniciando atualizacoes em seu DNS...
-			 echo.
-			 call :NOIPQUATRO
-			 echo.
-			 call :DYNVQUATRO )
+		     echo %IPVQUATRO% > "%~dp0ipv4.txt"
+		     echo Arquivo atualizado.
+		     echo.
+		     echo.
+		     echo.
+		     echo Iniciando atualizacoes em seu DNS...
+		     echo.
+		     call :NOIPQUATRO
+		     echo.
+		     call :DYNVQUATRO )
 		 ::----------------------------------------------------------------------------------------------------------
      endlocal
-	 goto :eof
+     goto :eof
 	 
 ::--------------------------------------------------------------------------------------------------------------------
 ::--------------------------------------------------------------------------------------------------------------------
@@ -94,23 +94,23 @@ goto :main
 		 
 		 if "%RESPOSTA%"=="911" (
 		     echo Servidor fora do ar, tentarei mais tarde. :/
-			 endlocal
-			 goto :eof )
+		     endlocal
+		     goto :eof )
 		 ::echo %RESPOSTA% | findstr /r /c:"%AUTENTICACAO%" > nul && (
 		 if "%RESPOSTA%"=="%AUTENTICACAO%" (
 		      echo Credenciais invalidas.
-			  endlocal
-			  goto :eof )
+		      endlocal
+		      goto :eof )
 		 echo %RESPOSTA% | findstr /r /c:"%INALTERADO%" > nul && (
 		      echo Nao foi necessario ser atualizado. ;^)
-			  endlocal
-			  goto :eof )
+		      endlocal
+		      goto :eof )
 		 echo %RESPOSTA% | findstr /r /c:"%ATUALIZADO%" > nul && (
 		      echo Atualizado. :^) ) || (
 		      echo No momento nao foi possivel atualizar, tentarei mais tarde. :/ )
 		 ::----------------------------------------------------------------------------------------------------------
      endlocal
-	 goto :eof
+     goto :eof
 	 
 ::--------------------------------------------------------------------------------------------------------------------
 ::--------------------------------------------------------------------------------------------------------------------
@@ -137,22 +137,22 @@ goto :main
 		 
 		 echo %RESPOSTA% | findstr /r /c:"%AUTENTICACAO%" > nul && (
 		      echo Token invalido.
-			  endlocal
-			  goto :eof )
+		      endlocal
+		      goto :eof )
 		 echo %RESPOSTA% | findstr /r /c:"%ZONA%" > nul && (
 		      echo DNS inserido errado, corrija ou acrescente a sua zona esse hostname.
-			  endlocal
-			  goto :eof )
+		      endlocal
+		      goto :eof )
 		 echo %RESPOSTA% | findstr /r /c:"%INALTERADO%" > nul && (
 		      echo Nao foi necessario ser atualizado. ;^) 
-			  endlocal
-			  goto :eof )
+		      endlocal
+		      goto :eof )
 		 echo %RESPOSTA% | findstr /r /c:"%ATUALIZADO%" > nul && (
 		      echo Atualizado. :^) ) || ( 
 		      echo No momento nao foi possivel atualizar, tentarei mais tarde. :/ )
 		 ::----------------------------------------------------------------------------------------------------------
      endlocal
-	 goto :eof
+     goto :eof
      
 ::----------------------------------------------------------------------------------------------------------------------------------------------------
 ::----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -176,7 +176,7 @@ goto :main
 		 ::----------------------------------------------------------------------------------------------------------
 		     for /f "delims=*" %%A in ('wmic nicconfig get ipaddress') do for /f "tokens=3-4 delims=, " %%B in ("%%~A") do set "IPVSEIS=%%~B"
 		     if "%IPVSEIS%"=="" (
-			     echo Rede nao possui suporte ao IPv6 ou esta desabilitada.
+		         echo Rede nao possui suporte ao IPv6 ou esta desabilitada.
 		         endlocal
 		         goto :eof ) )
 		 ::----------------------------------------------------------------------------------------------------------
@@ -186,7 +186,7 @@ goto :main
 		 if "%HTTPCODE%"=="000" (
 		     echo Rede desconectada.
 		     endlocal
-			 goto :eof )
+		     goto :eof )
 		 ::----------------------------------------------------------------------------------------------------------
 		 if "%HTTPCODE%"=="200" (
 		     for /f "delims=" %%A in ('curl -s -X GET "%URLSEIS%"') do set "IPVSEIS=%%A"
@@ -195,12 +195,12 @@ goto :main
 	     ::----------------------------------------------------------------------------------------------------------
 		 if "%ARQUIVO%"=="" (
 		     set "ARQUIVO=--"
-			 echo %IPVSEIS% > "%~dp0ipv6.txt" ) else (
-			 set "ARQUIVO=%ARQUIVO:~0,-1%" )
+		     echo %IPVSEIS% > "%~dp0ipv6.txt" ) else (
+		     set "ARQUIVO=%ARQUIVO:~0,-1%" )
 		 ::----------------------------------------------------------------------------------------------------------
 		 if "%HTTPCODE%"=="405" (
 		     for /f "delims=" %%A in ('curl -s -X GET "%URLSEIS%"') do set "IPVSEIS=%%A"
-			 
+		     
 		     for /f "delims=*" %%A in (%~dp0ipv6.txt) do set "ARQUIVO=%%A" )
 		 ::----------------------------------------------------------------------------------------------------------
 		 ::----------------------------------------------------------------------------------------------------------
@@ -217,19 +217,19 @@ goto :main
 		 echo ===================
 		 if "%ARQUIVO%"=="%IPVSEIS%" (
 		     echo Nao e necessario seu DNS ser atualizado. ;^) ) else (
-			 echo %IPVSEIS% > "%~dp0ipv6.txt"
-			 echo Arquivo atualizado.
-			 echo.
-			 echo.
-			 echo.
-			 echo Iniciando atualizacoes em seu DNS...
-			 echo.
-			 call :NOIPSEIS
-			 echo.
-			 call :DYNVSEIS )
+		     echo %IPVSEIS% > "%~dp0ipv6.txt"
+		     echo Arquivo atualizado.
+		     echo.
+		     echo.
+		     echo.
+		     echo Iniciando atualizacoes em seu DNS...
+		     echo.
+		     call :NOIPSEIS
+		     echo.
+		     call :DYNVSEIS )
 		 ::----------------------------------------------------------------------------------------------------------
      endlocal
-	 goto :eof
+     goto :eof
 	 
 ::--------------------------------------------------------------------------------------------------------------------
 ::--------------------------------------------------------------------------------------------------------------------
@@ -258,23 +258,23 @@ goto :main
 		 
 		 if "%RESPOSTA%"=="911" (
 		     echo Servidor fora do ar, tentarei mais tarde. :/
-			 endlocal
-			 goto :eof )
+		     endlocal
+		     goto :eof )
 		 ::if "%RESPOSTA%"=="%AUTENTICACAO%" (
 		 echo %RESPOSTA% | findstr /r /c:"%AUTENTICACAO%" > nul && (
 		      echo Credenciais invalidas.
-			  endlocal
-			  goto :eof )
+		      endlocal
+		      goto :eof )
 		 echo %RESPOSTA% | findstr /r /c:"%INALTERADO%" > nul && (
 		      echo Nao foi necessario ser atualizado. ;^)
-			  endlocal
-			  goto :eof )
+		      endlocal
+		      goto :eof )
 		 echo %RESPOSTA% | findstr /r /c:"%ATUALIZADO%" > nul && (
 		      echo Atualizado. :^) ) || (
 		      echo No momento nao foi possivel atualizar, tentarei mais tarde. :/ )
 		 ::----------------------------------------------------------------------------------------------------------
      endlocal
-	 goto :eof
+     goto :eof
 	 
 ::--------------------------------------------------------------------------------------------------------------------
 ::--------------------------------------------------------------------------------------------------------------------
@@ -302,22 +302,22 @@ goto :main
 		 ::if "%RESPOSTA%"=="%AUTENTICACAO%" (
 		 echo %RESPOSTA% | findstr /r /c:"%AUTENTICACAO%" > nul && (
 		      echo Token invalido.
-			  endlocal
-			  goto :eof )
+		      endlocal
+		      goto :eof )
 		 echo %RESPOSTA% | findstr /r /c:"%ZONA%" > nul && (
 		      echo DNS inserido errado, corrija ou acrescente a sua zona esse hostname.
-			  endlocal
-			  goto :eof )
+		      endlocal
+		      goto :eof )
 		 echo %RESPOSTA% | findstr /r /c:"%INALTERADO%" > nul && (
 		      echo Nao foi necessario ser atualizado. ;^)
-			  endlocal
-			  goto :eof )
+		      endlocal
+		      goto :eof )
 		 echo %RESPOSTA% | findstr /r /c:"%ATUALIZADO%" > nul && (
 		      echo Atualizado. :^) ) || (
 		      echo No momento nao foi possivel atualizar, tentarei mais tarde. :/ )
 		 ::----------------------------------------------------------------------------------------------------------
      endlocal
-	 goto :eof
+     goto :eof
      
 ::----------------------------------------------------------------------------------------------------------------------------------------------------
 ::----------------------------------------------------------------------------------------------------------------------------------------------------
