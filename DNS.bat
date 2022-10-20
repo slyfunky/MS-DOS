@@ -340,13 +340,13 @@ echo.
 
 ::  [No-IP]
 ::   DNS
-set "NOIPDNS=my_dns.no-ip.org"
+set "NOIPDNS=yourhost.no-ip.org"
 ::   Credentials must be encoded to base64 format
 set "NOIPTOKEN=email:password"
 
 ::  [Dynv6]
 ::   DNS
-set "DYNVDNS=my_dns.dynv6.net"
+set "DYNVDNS=yourhost.dynv6.net"
 ::   Token
 set "DYNVTOKEN=token"
 
